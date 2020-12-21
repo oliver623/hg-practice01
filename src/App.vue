@@ -38,7 +38,21 @@
     <button @click="handleFocus">点我</button> -->
     <!-- <Demo10></Demo10> -->
     <!-- <Demo11></Demo11> -->
-    <Demo12></Demo12>
+    <!-- <Demo12></Demo12> -->
+    <!-- <Demo13></Demo13> -->
+
+    
+    <div class="router">
+    <!-- <router-link to="/">首页 | </router-link>
+    <router-link to="/about">关于 | </router-link> -->
+      <router-link :to="{name: 'index'}">首页 | </router-link>
+      <router-link :to="{name: 'about'}">关于 | </router-link>
+      <router-link :to="{name: 'user', params: {id: 1}}">用户1 | </router-link>
+      <router-link :to="{name: 'user', params: {id: 2}}">用户2 | </router-link>
+      <router-link to="/user-admin">用户-其他 | </router-link>
+      <router-link :to="{name: 'page', query:{id: 1, title:'foo'}}">Page页面 | </router-link>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -70,6 +84,7 @@ export default {
     Demo10: () => import('./components/Demo10'),
     Demo11: () => import('./components/Demo11'),
     Demo12: () => import('./components/Demo12'),
+    Demo13: () => import('./components/Demo13'),
   },
   data() {
     return {
@@ -84,8 +99,8 @@ export default {
     }
   },
   mounted(){
-    console.log('process.env.NODE_ENV====', process.env.NODE_ENV)
-    console.log('process.env.VUE_APP_MODE====', process.env.VUE_APP_MODE)
+    // console.log('process.env.NODE_ENV====', process.env.NODE_ENV)
+    // console.log('process.env.VUE_APP_MODE====', process.env.VUE_APP_MODE)
   },
   methods: {
     handleChange(str) {
@@ -106,5 +121,8 @@ h1 {
 }
 h2 {
   background: lightcoral;
+}
+.router{
+  text-align: center;
 }
 </style>
