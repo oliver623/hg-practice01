@@ -1,8 +1,13 @@
 <template>
   <div class="User">
     <h3>用户页面{{$route.params.id}}</h3>
- <h3> {{id}}</h3>
- <!-- <h3> {{title}}</h3> -->
+ <h3>id: {{id}}</h3>
+ <h3>title: {{title}}</h3>
+ <button @click="goHome">首页</button>
+ <button @click="goRefresh">刷新</button>
+ <button @click="goForward">前进</button>
+ <button @click="goBack">后退</button>
+ <router-view></router-view>
   </div>
 </template>
 
@@ -15,8 +20,8 @@ export default {
   props: ['id', 'title'],
 
   created() {
-    console.log('id====', this.id)
-    console.log('this.$route.params====', this.$route.params)
+    console.log('this.$router====', this.$router)
+    console.log('this.$route.params====', this.$route)
   },
   watch: {
     $route() {
@@ -26,6 +31,32 @@ export default {
   beforeRouteUpdate(to, from, next) {
     console.log('this.$route.params====', this.$route.params.id)
     next()
+  },
+  methods:{
+    goHome(){
+      // this.$router.push('/')
+      // this.$router.push({
+      //   name: 'user',
+      //   params:{id:2},
+      //   query:{title:'cdffv'}
+      // })
+      // this.$router.push({
+      //   path: '/user',
+      //   params: {id:2}
+      // })
+      this.$router.push({
+        path: '/', 
+      })
+    },
+    goRefresh(){
+      this.$router.go(0)
+    },
+    goBack(){
+      this.$router.go(-1)
+    },
+    goForward(){
+      this.$router.go(1)
+    },
   }
 }
 </script>

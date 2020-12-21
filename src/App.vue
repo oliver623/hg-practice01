@@ -49,8 +49,8 @@
       <router-link :to="{name: 'about'}">关于 | </router-link>
       <router-link :to="{name: 'user', params: {id: 1}}">用户1 | </router-link>
       <router-link :to="{name: 'user', params: {id: 2}}">用户2 | </router-link>
-      <router-link to="/user-admin">用户-其他 | </router-link>
-      <router-link :to="{name: 'page', query:{id: 1, title:'foo'}}">Page页面 | </router-link>
+      <router-link to="/user-admin">用户-其他 | </router-link> o'}}">Page页面 | </router-lin 
+      <router-link :to="{path: '/user/1/posts'}">posts | </router-link>
       <router-view></router-view>
     </div>
   </div>

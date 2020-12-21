@@ -23,12 +23,16 @@ const routes = [{
     // 动态路由匹配
     path: '/user/:id',
     name: 'user',
-    props: true,
-    // props:(route) => ({
-    //   id:route.params.id,
-    //   title:route.query.title
-    // }),
-    component: () => import('@/views/User')
+    // props: true, //只能接受params参数
+    props:(route) => ({
+      id:route.params.id,
+      title:route.query.title
+    }),//可以接受params参数和query参数
+    component: () => import('@/views/User'),
+    children: [
+      {path: 'profile', component: ()=> import('@/views/Profile')},
+      {path: 'posts', component: ()=> import('@/views/Posts')}
+    ]
   },
   {
     path: '/user-*',
