@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import Home from '@/views/index'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -13,7 +14,12 @@ const routes = [{
   {
     path: '/home',
     name: 'index',
-    component: () => import('@/views/index'),
+    // component: () => import('@/views/index'),
+    components: {
+      default: Home,
+      main: () => import('@/views/Main'),
+      sidebar: () => import('@/views/Sidebar')
+    }
   }, {
     path: '/about',
     name: 'about',
@@ -23,15 +29,20 @@ const routes = [{
     // 动态路由匹配
     path: '/user/:id',
     name: 'user',
-    // props: true, //只能接受params参数
-    props:(route) => ({
-      id:route.params.id,
-      title:route.query.title
-    }),//可以接受params参数和query参数
+    // props: true,
+    props: (route) => ({
+      id: route.params.id,
+      title: route.query.title
+    }),
     component: () => import('@/views/User'),
-    children: [
-      {path: 'profile', component: ()=> import('@/views/Profile')},
-      {path: 'posts', component: ()=> import('@/views/Posts')}
+    children: [{
+        path: 'profile',
+        component: () => import('@/views/Profile')
+      },
+      {
+        path: 'posts',
+        component: () => import('@/views/Posts')
+      }
     ]
   },
   {
@@ -46,6 +57,16 @@ const routes = [{
     component: () => import('@/views/Page')
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/Login')
+  },
+  {
+    path: '/notes',
+    name: 'notes',
+    component: () => import('@/views/Notes')
+  },
+  {
     path: '*',
     name: 'notFound',
     component: () => import('@/views/NotFound')
@@ -56,6 +77,12 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  console.log('to====', to)
+  if (to.name === 'notes' && !localStorage.getItem('user')) next('/login')
+  else next()
 })
 
 export default router
