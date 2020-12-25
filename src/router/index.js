@@ -64,7 +64,18 @@ const routes = [{
   {
     path: '/notes',
     name: 'notes',
-    component: () => import('@/views/Notes')
+    component: () => import('@/views/Notes'),
+    meta: {require: true}
+  },{
+    path: '/book',
+    name: 'book',
+    component: () => import('@/views/Book'),
+    meta: {require :true}
+  },
+  {
+    path: '/eaditor',
+    name: 'eaditor',
+    component: ()=> import('@/views/Eaditor')
   },
   {
     path: '*',
@@ -80,9 +91,22 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('to====', to)
-  if (to.name === 'notes' && !localStorage.getItem('user')) next('/login')
-  else next()
+  if (to.matched.some(val => val.meta.require)){
+    if(!localStorage.getItem('user')){
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    }else{
+      next()
+    }
+  }else{
+    next()
+  }
 })
+// router.beforeEach((to, from, next) => {
+//   if (to.name === 'notes' && !localStorage.getItem('user')) next('/login')
+//   else next()
+// })
 
 export default router

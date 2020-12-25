@@ -47,16 +47,19 @@
     <router-link to="/about">关于 | </router-link> -->
       <router-link :to="{name: 'index'}">首页 | </router-link>
       <router-link :to="{name: 'about'}">关于 | </router-link>
-      <router-link :to="{name: 'user', params: {id: 1}}">用户1 | </router-link>
+      {{$store.state.count}}
+      <!-- <router-link :to="{name: 'user', params: {id: 1}}">用户1 | </router-link>
       <router-link :to="{name: 'user', params: {id: 2}}">用户2 | </router-link>
       <router-link to="/user-admin">用户-其他 |</router-link>
       <router-link to="/page">Page页面 | </router-link>
       <router-link :to="{path: '/user/1/posts'}">posts | </router-link>
       <router-link :to="{path: '/user/1/profile'}">profile | </router-link>
       <router-link :to="{name: 'notes'}">我的笔记 | </router-link>
-      <router-view></router-view>
+      <router-link :to="{name: 'book'}">我的收藏的书 | </router-link>
+      <router-link :to="{name: 'eaditor'}">编辑 | </router-link>
       <router-view name="main"></router-view>
-      <router-view name="sidebar"></router-view>
+      <router-view name="sidebar"></router-view> -->
+      <router-view></router-view>
     </div>
   </div>
 </template>

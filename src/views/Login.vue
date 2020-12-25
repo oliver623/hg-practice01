@@ -20,7 +20,10 @@ export default {
     LoginIn(){
       setTimeout(() => {
         if(this.name&&this.pwd) {localStorage.setItem('user', JSON.stringify({name:this.name}))
-        this.$router.push('/notes')
+        //重定向到   从 router.beforeEach 传过来的query参数
+        this.$router.push({
+          path: this.$route.query.redirect
+        })
         }
         else this.$message.error('用户名或密码不能为空');
       }, 2000)
