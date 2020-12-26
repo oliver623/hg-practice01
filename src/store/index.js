@@ -9,7 +9,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   // 当前的状态
   state: {
-    count: 0
+    count: 0,
+    userName: '张三'
+  },
+  getters:{
+    evenOrOdd(state){
+        return state.count%2 === 0? '偶数':'基数'
+    }
   },
   // 声明同步的方法
   mutations: {
@@ -20,7 +26,12 @@ export default new Vuex.Store({
     },
     des(state){
       state.count--
-    }
+    },
+    asyncAdd(state){
+      setTimeout(() => {
+        state.count++
+      }, 1000);
+    },
   },
   // 声明异步的方法
   actions: {
@@ -32,6 +43,9 @@ export default new Vuex.Store({
     // des({commit}){// 从context中解构commit
     //   commit('des')
     // }
+    asyncAdd({commit}){
+      commit('asyncAdd')
+    }
   },
   modules: {
   }
