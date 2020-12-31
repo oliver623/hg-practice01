@@ -27,9 +27,9 @@ export default new Vuex.Store({
     des(state){
       state.count--
     },
-    asyncAdd(state){
+    asyncAdd(state, amount){
       setTimeout(() => {
-        state.count++
+        state.count+=amount
       }, 1000);
     },
   },
@@ -43,8 +43,8 @@ export default new Vuex.Store({
     // des({commit}){// 从context中解构commit
     //   commit('des')
     // }
-    asyncAdd({commit}){
-      commit('asyncAdd')
+    asyncAdd({commit}, {amount}){
+      commit('asyncAdd',amount)
     }
   },
   modules: {

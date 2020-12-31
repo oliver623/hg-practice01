@@ -23,6 +23,8 @@ export default {
     //   return this.$store.state.userName
     // },
     // ...mapState(['count', 'userName'])
+
+    // 辅助函数仅用于不提交数据的方式
     ...mapState({
       Mycount: 'count',
       user: 'userName'
@@ -33,11 +35,18 @@ export default {
     ...mapGetters(['evenOrOdd'])
   },
   methods: {
-    // asyncAdd(){
-    //   this.$store.dispatch('asyncAdd')
-    // },
+    asyncAdd(){
+      // 在组件内部提交数据  载荷形式分发
+      // this.$store.dispatch('asyncAdd',{
+      //   amount: 10
+      // })
+      this.$store.dispatch({
+        type: 'asyncAdd',
+        amount:10,
+      })
+    },
 
-    ...mapActions(['asyncAdd']),
+    // ...mapActions(['asyncAdd']),
 
     // add(){
     //   // dispatch action中声明的方法
